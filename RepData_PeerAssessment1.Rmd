@@ -8,7 +8,7 @@ output:
 
 ## Loading and preprocessing the data
 
-#### Load the activity data
+ Load the activity data
 
 ```{r}
 df <- read.csv("C:/Users/muditmithal/Documents/activity.csv", header = TRUE)
@@ -19,9 +19,9 @@ df$date <- as.Date(df$date, "%Y-%m-%d")
 
 ## What is mean total number of steps taken per day?
 
-#### Calculate the total number of steps taken per day Make a histogram of the total number of steps taken each day
+Calculate the total number of steps taken per day Make a histogram of the total number of steps taken each day
 
-#### The total number of steps taken per day was calculated by using aggregate function.
+The total number of steps taken per day was calculated by using aggregate function.
 
 ```{r}
 stepsDay_totals <- aggregate(steps ~ date, data = df, FUN=sum, na.rm=TRUE)
@@ -30,7 +30,7 @@ names(stepsDay_totals) <- c("date", "total_steps")
 
 
 
-#### Histogram
+Histogram
 
 ```{r}
 hist(stepsDay_totals$total_steps, breaks=10, col="red", main="Histogram of total number of steps per day", xlab="Total number of steps in a day")
