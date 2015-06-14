@@ -36,14 +36,14 @@ Histogram
 hist(stepsDay_totals$total_steps, breaks=10, col="red", main="Histogram of total number of steps per day", xlab="Total number of steps in a day")
 ```
 
-#### Calculate and report the mean and median of the total number of steps taken per day
+Calculate and report the mean and median of the total number of steps taken per day
 
 ```{r}
 mean(stepsDay_totals$total_steps)
 ```
 
 
-#### Median
+Median
 
 
 ```{r}
@@ -53,7 +53,7 @@ median(stepsDay_totals$total_steps)
 
 ## What is the average daily activity pattern?
 
-#### Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
+Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 
 ```{r}
 stepsInterval_mean <- aggregate(steps ~ interval, data = df, FUN=mean, na.rm=TRUE)
@@ -61,7 +61,7 @@ names(stepsInterval_mean) <- c("interval", "steps_mean")
 plot(stepsInterval_mean, type = "l", main="The average number of steps")
 ```
 
-#### Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
+Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
 
 ```{r}
@@ -71,7 +71,7 @@ stepsInterval_mean$interval[max_interval]
 
 ## Imputing missing values
 
-#### The total number of rows with missing values in the dataset
+The total number of rows with missing values in the dataset
 
 ```{r}
 missing_values <- sum(is.na(df))
@@ -79,8 +79,7 @@ missing_values
 ```
 
 
-
-#### Missing values will be replaced by mean for that day. If the mean is NA, missing values will be replaced by 0.
+Missing values will be replaced by mean for that day. If the mean is NA, missing values will be replaced by 0.
 
 ```{r}
 nas_vector <- is.na(df$steps)
@@ -88,7 +87,7 @@ stepsDay_mean <- aggregate(steps ~ date, data = df, FUN=mean, na.rm=FALSE)
 names(stepsDay_mean) <- c("date", "steps_mean")
 ```
 
-####copy data frame df
+copy data frame df
 ```{r}
 imputed_df <- df
 head(imputed_df)
@@ -96,7 +95,7 @@ head(imputed_df)
 
 
 
-#### Loop
+Loop
 
 ```{r}
 for (i in 1:nrow(imputed_df)){
@@ -116,7 +115,7 @@ head(imputed_df)
 
 
 
-#### Complete cases checks
+Complete cases checks
 
 ```{r}
 sum(complete.cases(df))
@@ -126,9 +125,9 @@ sum(complete.cases(imputed_df))
 
 
 
-#### Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
+Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
 
-####New dataset needs to be aggregated by date
+New dataset needs to be aggregated by date
 
 ```{r}
 step_tot <- aggregate(steps ~ date, data = imputed_df, FUN=sum, na.rm=TRUE)
@@ -139,7 +138,7 @@ hist(step_tot$total_steps, breaks=10, col="red", main="Histogram of total number
 
 
 
-#### New mean and median are calculated. Missing values have got the impact on those parameters.
+New mean and median are calculated. Missing values have got the impact on those parameters.
 
 
 
@@ -147,7 +146,7 @@ hist(step_tot$total_steps, breaks=10, col="red", main="Histogram of total number
 mean(step_tot$total_steps)
 ```
 
-#### Median
+Median
 
 ```{r}
 median(step_tot$total_steps)
@@ -157,9 +156,9 @@ median(step_tot$total_steps)
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-#### This calculation will be carried for the original data.
+ This calculation will be carried for the original data.
 
-#two new columns weekday and day_type are added to df, by default day_type is weekday for all weekdays
+two new columns weekday and day_type are added to df, by default day_type is weekday for all weekdays
 
 ```{r}
 df$day <- weekdays(df$date)
@@ -168,7 +167,7 @@ df$day_type <- c("weekday")
 
 
 
-#loop to assign weekends
+loop to assign weekends
 ```{r}
 for (i in 1:nrow(df)){
     if (df$day[i] == "Saturday" || df$day[i] == "Sunday"){
